@@ -1,4 +1,4 @@
-<h1 align="center"><b>❤️ ALEXA MUSIC BOT ❤️</b></h1>
+<h1 align="center"><b>❤️ ALEXA MUSIC 3.0 New Repo [𝐂𝐥𝐢𝐜𝐤 𝐇𝐞𝐫𝐞](https://github.com/jankarikiduniya/AlexaMusic) ❤️</b></h1>
 
 <h4 align="center">Alexa A Powerful, Smart And Simple Bot To Play Audio And Video Song In Telegram<br> ... Written With Python and Telethon...</h4>
 
