@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# VARS
+# VARS SA
 
 get_queue = {}
 BOT_TOKEN = getenv("BOT_TOKEN")
