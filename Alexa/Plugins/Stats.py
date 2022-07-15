@@ -26,10 +26,27 @@ from pyrogram.types import Message
 
 from pytgcalls import __version__ as pytgover
 
-from config import (MONGO_DB_URI, MUSIC_BOT_NAME, STRING1, STRING2, STRING3,
-                    STRING4, STRING5)
-from Alexa import (ASS_CLI_1, ASS_CLI_2, ASS_CLI_3, ASS_CLI_4, ASS_CLI_5,
-                   BOT_ID, MUSIC_BOT_NAME, SUDOERS, app, boottime)
+from config import (
+    MONGO_DB_URI,
+    MUSIC_BOT_NAME,
+    STRING1,
+    STRING2,
+    STRING3,
+    STRING4,
+    STRING5,
+)
+from Alexa import (
+    ASS_CLI_1,
+    ASS_CLI_2,
+    ASS_CLI_3,
+    ASS_CLI_4,
+    ASS_CLI_5,
+    BOT_ID,
+    MUSIC_BOT_NAME,
+    SUDOERS,
+    app,
+    boottime,
+)
 from Alexa.Database import get_gbans_count, get_served_chats, get_sudoers
 from Alexa.Inline import stats1, stats2, stats3, stats4, stats5, stats6, stats7
 from Alexa.Plugins import ALL_MODULES
@@ -109,9 +126,7 @@ async def stats_markup(_, CallbackQuery):
             cupc += f"Core {i}  : {percentage}%\n"
         cupc += "**Total CPU Usage:**\n"
         cupc += f"All Cores Usage: {psutil.cpu_percent()}%\n"
-        ram = (
-            str(round(psutil.virtual_memory().total / (1024.0 ** 3))) + " GB"
-        )
+        ram = str(round(psutil.virtual_memory().total / (1024.0**3))) + " GB"
         bot_uptime = int(time.time() - boottime)
         uptime = f"{get_readable_time((bot_uptime))}"
         smex = f"""
@@ -136,15 +151,13 @@ async def stats_markup(_, CallbackQuery):
 """
         await CallbackQuery.edit_message_text(smex, reply_markup=stats2)
     if command == "sto_stats":
-        await CallbackQuery.answer(
-            "Getting Storage Stats...", show_alert=True
-        )
+        await CallbackQuery.answer("Getting Storage Stats...", show_alert=True)
         hdd = psutil.disk_usage("/")
-        total = hdd.total / (1024.0 ** 3)
+        total = hdd.total / (1024.0**3)
         total = str(total)
-        used = hdd.used / (1024.0 ** 3)
+        used = hdd.used / (1024.0**3)
         used = str(used)
-        free = hdd.free / (1024.0 ** 3)
+        free = hdd.free / (1024.0**3)
         free = str(free)
         smex = f"""
 [•]<u>**Storage Stats**</u>
@@ -178,9 +191,7 @@ async def stats_markup(_, CallbackQuery):
 **Served Chats:** {len(served_chats)}"""
         await CallbackQuery.edit_message_text(smex, reply_markup=stats4)
     if command == "mongo_stats":
-        await CallbackQuery.answer(
-            "Getting MongoDB Stats...", show_alert=True
-        )
+        await CallbackQuery.answer("Getting MongoDB Stats...", show_alert=True)
         try:
             pymongo = MongoClient(MONGO_DB_URI)
         except Exception as e:
@@ -224,9 +235,7 @@ async def stats_markup(_, CallbackQuery):
     if command == "gen_stats":
         start = datetime.now()
         uptime = await bot_sys_stats()
-        await CallbackQuery.answer(
-            "Getting General Stats...", show_alert=True
-        )
+        await CallbackQuery.answer("Getting General Stats...", show_alert=True)
         end = datetime.now()
         resp = (end - start).microseconds / 1000
         smex = f"""
@@ -238,9 +247,7 @@ async def stats_markup(_, CallbackQuery):
     if command == "wait_stats":
         await CallbackQuery.answer()
     if command == "assis_stats":
-        await CallbackQuery.answer(
-            "Getting Assistant Stats...", show_alert=True
-        )
+        await CallbackQuery.answer("Getting Assistant Stats...", show_alert=True)
         await CallbackQuery.edit_message_text(
             "Getting Assistant Stats.. Please Wait...", reply_markup=stats7
         )

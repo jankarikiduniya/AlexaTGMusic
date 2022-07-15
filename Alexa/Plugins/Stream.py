@@ -5,37 +5,62 @@
 # Harshit Sharma
 
 
-
 import asyncio
 from os import path
 
 from pyrogram import filters
-from pyrogram.types import (InlineKeyboardMarkup, InputMediaPhoto,
-                            KeyboardButton, Message, ReplyKeyboardMarkup,
-                            ReplyKeyboardRemove, Voice)
+from pyrogram.types import (
+    InlineKeyboardMarkup,
+    InputMediaPhoto,
+    KeyboardButton,
+    Message,
+    ReplyKeyboardMarkup,
+    ReplyKeyboardRemove,
+    Voice,
+)
 from youtube_search import YoutubeSearch
 from youtubesearchpython import VideosSearch
 
-from Alexa import (BOT_USERNAME, DURATION_LIMIT, DURATION_LIMIT_MIN,
-                   MUSIC_BOT_NAME, app, db_mem)
+from Alexa import (
+    BOT_USERNAME,
+    DURATION_LIMIT,
+    DURATION_LIMIT_MIN,
+    MUSIC_BOT_NAME,
+    app,
+    db_mem,
+)
 from Alexa.Core.PyTgCalls.Converter import convert
 from Alexa.Core.PyTgCalls.Downloader import download
-from Alexa.Database import (get_active_video_chats, get_video_limit,
-                            is_active_video_chat, is_on_off)
+from Alexa.Database import (
+    get_active_video_chats,
+    get_video_limit,
+    is_active_video_chat,
+    is_on_off,
+)
 from Alexa.Decorators.assistant import AssistantAdd
 from Alexa.Decorators.checker import checker
-from Alexa.Inline import (choose_markup, livestream_markup, playlist_markup,
-                          search_markup, search_markup2, stream_quality_markup,
-                          url_markup, url_markup2)
+from Alexa.Inline import (
+    choose_markup,
+    livestream_markup,
+    playlist_markup,
+    search_markup,
+    search_markup2,
+    stream_quality_markup,
+    url_markup,
+    url_markup2,
+)
 from Alexa.Utilities.changers import seconds_to_min, time_to_seconds
 from Alexa.Utilities.chat import specialfont_to_normal
 from Alexa.Utilities.theme import check_theme
 from Alexa.Utilities.thumbnails import gen_thumb
 from Alexa.Utilities.url import get_url
 from Alexa.Utilities.videostream import start_live_stream, start_video_stream
-from Alexa.Utilities.youtube import (get_m3u8, get_yt_info_id,
-                                     get_yt_info_query,
-                                     get_yt_info_query_slider)
+from Alexa.Utilities.youtube import (
+    get_m3u8,
+    get_yt_info_id,
+    get_yt_info_query,
+    get_yt_info_query_slider,
+)
 
 loop = asyncio.get_event_loop()
 
@@ -155,9 +180,7 @@ async def Live_Videos_Stream(_, CallbackQuery):
     thumb = await gen_thumb(thumbnail, title, user_id, theme, chat_title)
     nrs, ytlink = await get_m3u8(videoid)
     if nrs == 0:
-        return await CallbackQuery.message.reply_text(
-            "Video Formats not Found.."
-        )
+        return await CallbackQuery.message.reply_text("Video Formats not Found..")
     await start_live_stream(
         CallbackQuery,
         quality,
@@ -201,9 +224,7 @@ async def Videos_Stream(_, CallbackQuery):
     thumb = await gen_thumb(thumbnail, title, user_id, theme, chat_title)
     nrs, ytlink = await get_m3u8(videoid)
     if nrs == 0:
-        return await CallbackQuery.message.reply_text(
-            "Video Formats not Found.."
-        )
+        return await CallbackQuery.message.reply_text("Video Formats not Found..")
     await start_video_stream(
         CallbackQuery,
         quality,

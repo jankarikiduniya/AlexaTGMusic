@@ -5,8 +5,13 @@
 # Harshit Sharma
 
 
-from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
-                            InlineKeyboardMarkup, InputMediaPhoto, Message)
+from pyrogram.types import (
+    CallbackQuery,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    InputMediaPhoto,
+    Message,
+)
 
 from config import MUSIC_BOT_NAME, SUPPORT_CHANNEL, SUPPORT_GROUP
 from Alexa import BOT_USERNAME
@@ -19,12 +24,8 @@ def setting_markup2():
             InlineKeyboardButton(text="🎚 ᴀᴜᴅɪᴏ ᴠᴏʟᴜᴍᴇ", callback_data="AV"),
         ],
         [
-            InlineKeyboardButton(
-                text="👥 ᴀᴜᴛʜᴏʀɪᴢᴇᴅ ᴜsᴇʀs", callback_data="AU"
-            ),
-            InlineKeyboardButton(
-                text="💻 ᴅᴀsʜʙᴏᴀʀᴅ", callback_data="Dashboard"
-            ),
+            InlineKeyboardButton(text="👥 ᴀᴜᴛʜᴏʀɪᴢᴇᴅ ᴜsᴇʀs", callback_data="AU"),
+            InlineKeyboardButton(text="💻 ᴅᴀsʜʙᴏᴀʀᴅ", callback_data="Dashboard"),
         ],
         [
             InlineKeyboardButton(text="🗑️ ᴄʟᴏsᴇ", callback_data="close"),
@@ -41,11 +42,7 @@ def start_pannel():
                     text="🗂 ʜᴇʟᴘᴇʀ ᴄᴏᴍᴍᴀɴᴅs ᴍᴇɴᴜ", callback_data="shikhar"
                 ),
             ],
-            [
-                InlineKeyboardButton(
-                    text="⚙️ sᴇᴛᴛɪɴɢs", callback_data="settingm"
-                )
-            ],
+            [InlineKeyboardButton(text="⚙️ sᴇᴛᴛɪɴɢs", callback_data="settingm")],
         ]
         return f"🎛  **ᴛʜɪs ɪs {MUSIC_BOT_NAME}**", buttons
     if not SUPPORT_CHANNEL and SUPPORT_GROUP:
@@ -55,15 +52,9 @@ def start_pannel():
                     text="🗂 ʜᴇʟᴘᴇʀ ᴄᴏᴍᴍᴀɴᴅs ᴍᴇɴᴜ", callback_data="shikhar"
                 ),
             ],
+            [InlineKeyboardButton(text="⚙️ sᴇᴛᴛɪɴɢs", callback_data="settingm")],
             [
-                InlineKeyboardButton(
-                    text="⚙️ sᴇᴛᴛɪɴɢs", callback_data="settingm"
-                )
-            ],
-            [
-                InlineKeyboardButton(
-                    text="🌸 sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url=f"{SUPPORT_GROUP}"
-                ),
+                InlineKeyboardButton(text="🌸 sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url=f"{SUPPORT_GROUP}"),
             ],
         ]
         return f"🎛  **ᴛʜɪs ɪs {MUSIC_BOT_NAME}*", buttons
@@ -74,11 +65,7 @@ def start_pannel():
                     text="🗂 ʜᴇʟᴘᴇʀ ᴄᴏᴍᴍᴀɴᴅs ᴍᴇɴᴜ", callback_data="shikhar"
                 ),
             ],
-            [
-                InlineKeyboardButton(
-                    text="⚙️ sᴇᴛᴛɪɴɢs", callback_data="settingm"
-                )
-            ],
+            [InlineKeyboardButton(text="⚙️ sᴇᴛᴛɪɴɢs", callback_data="settingm")],
             [
                 InlineKeyboardButton(
                     text="🌺 ᴏғғɪᴄɪᴀʟ ᴄʜᴀɴɴᴇʟ", url=f"{SUPPORT_CHANNEL}"
@@ -93,18 +80,12 @@ def start_pannel():
                     text="🗂 ʜᴇʟᴘᴇʀ ᴄᴏᴍᴍᴀɴᴅs ᴍᴇɴᴜ", callback_data="shikhar"
                 ),
             ],
-            [
-                InlineKeyboardButton(
-                    text="⚙️ sᴇᴛᴛɪɴɢs", callback_data="settingm"
-                )
-            ],
+            [InlineKeyboardButton(text="⚙️ sᴇᴛᴛɪɴɢs", callback_data="settingm")],
             [
                 InlineKeyboardButton(
                     text="🌸 ᴏғғɪᴄɪᴀʟ ᴄʜᴀɴɴᴇʟ", url=f"{SUPPORT_CHANNEL}"
                 ),
-                InlineKeyboardButton(
-                    text="🌺 sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url=f"{SUPPORT_GROUP}"
-                ),
+                InlineKeyboardButton(text="🌺 sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url=f"{SUPPORT_GROUP}"),
             ],
         ]
         return f"🎛  **ᴛʜɪs ɪs {MUSIC_BOT_NAME}**", buttons
@@ -140,9 +121,7 @@ def private_panel():
                 )
             ],
             [
-                InlineKeyboardButton(
-                    text="🌸 sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url=f"{SUPPORT_GROUP}"
-                ),
+                InlineKeyboardButton(text="🌸 sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url=f"{SUPPORT_GROUP}"),
             ],
         ]
         return f"🎛  **ᴛʜɪs ɪs {MUSIC_BOT_NAME}*", buttons
@@ -183,9 +162,7 @@ def private_panel():
                 InlineKeyboardButton(
                     text="🌸 ᴏғғɪᴄɪᴀʟ ᴄʜᴀɴɴᴇʟ", url=f"{SUPPORT_CHANNEL}"
                 ),
-                InlineKeyboardButton(
-                    text="🌺 sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url=f"{SUPPORT_GROUP}"
-                ),
+                InlineKeyboardButton(text="🌺 sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url=f"{SUPPORT_GROUP}"),
             ],
         ]
         return f"🎛  **ᴛʜɪs ɪs {MUSIC_BOT_NAME}**", buttons
@@ -198,12 +175,8 @@ def setting_markup():
             InlineKeyboardButton(text="🎚 ᴀᴜᴅɪᴏ ᴠᴏʟᴜᴍᴇ", callback_data="AV"),
         ],
         [
-            InlineKeyboardButton(
-                text="👥 ᴀᴜᴛʜᴏʀɪᴢᴇᴅ ᴜsᴇʀs", callback_data="AU"
-            ),
-            InlineKeyboardButton(
-                text="💻 ᴅᴀsʜʙᴏᴀʀᴅ", callback_data="Dashboard"
-            ),
+            InlineKeyboardButton(text="👥 ᴀᴜᴛʜᴏʀɪᴢᴇᴅ ᴜsᴇʀs", callback_data="AU"),
+            InlineKeyboardButton(text="💻 ᴅᴀsʜʙᴏᴀʀᴅ", callback_data="Dashboard"),
         ],
         [
             InlineKeyboardButton(text="✖🗑 ᴄʟᴏsᴇ", callback_data="close"),
@@ -215,11 +188,7 @@ def setting_markup():
 
 def volmarkup():
     buttons = [
-        [
-            InlineKeyboardButton(
-                text="🔄 ʀᴇsᴇᴛ ᴀᴜᴅɪᴏ ᴠᴏʟᴜᴍᴇ 🔄", callback_data="HV"
-            )
-        ],
+        [InlineKeyboardButton(text="🔄 ʀᴇsᴇᴛ ᴀᴜᴅɪᴏ ᴠᴏʟᴜᴍᴇ 🔄", callback_data="HV")],
         [
             InlineKeyboardButton(text="🔈 ʟᴏᴡ ᴠᴏʟ", callback_data="LV"),
             InlineKeyboardButton(text="🔉 ᴍᴇᴅɪᴜᴍ ᴠᴏʟ", callback_data="MV"),
@@ -228,11 +197,7 @@ def volmarkup():
             InlineKeyboardButton(text="🔊 ʜɪɢʜ ᴠᴏʟ", callback_data="HV"),
             InlineKeyboardButton(text="🔈 ᴀᴍᴘʟɪғɪᴇᴅ ᴠᴏʟ", callback_data="VAM"),
         ],
-        [
-            InlineKeyboardButton(
-                text="🔽 ᴄᴜsᴛᴏᴍ ᴠᴏʟᴜᴍᴇ 🔽", callback_data="Custommarkup"
-            )
-        ],
+        [InlineKeyboardButton(text="🔽 ᴄᴜsᴛᴏᴍ ᴠᴏʟᴜᴍᴇ 🔽", callback_data="Custommarkup")],
         [InlineKeyboardButton(text="🔙 ɢᴏ ʙᴀᴄᴋ", callback_data="settingm")],
     ]
     return f"⚙️  **{MUSIC_BOT_NAME} sᴇᴛᴛɪɴɢs**", buttons

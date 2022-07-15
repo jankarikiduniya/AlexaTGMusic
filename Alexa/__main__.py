@@ -5,8 +5,6 @@
 # Harshit Sharma
 
 
-
-
 import asyncio
 import importlib
 import os
@@ -19,18 +17,53 @@ from rich.console import Console
 from rich.table import Table
 from youtubesearchpython import VideosSearch
 
-from config import (LOG_GROUP_ID, LOG_SESSION, STRING1, STRING2, STRING3,
-                    STRING4, STRING5)
-from Alexa import (ASS_CLI_1, ASS_CLI_2, ASS_CLI_3, ASS_CLI_4, ASS_CLI_5,
-                   ASSID1, ASSID2, ASSID3, ASSID4, ASSID5, ASSNAME1, ASSNAME2,
-                   ASSNAME3, ASSNAME4, ASSNAME5, BOT_ID, BOT_NAME, LOG_CLIENT,
-                   OWNER_ID, app)
+from config import (
+    LOG_GROUP_ID,
+    LOG_SESSION,
+    STRING1,
+    STRING2,
+    STRING3,
+    STRING4,
+    STRING5,
+)
+from Alexa import (
+    ASS_CLI_1,
+    ASS_CLI_2,
+    ASS_CLI_3,
+    ASS_CLI_4,
+    ASS_CLI_5,
+    ASSID1,
+    ASSID2,
+    ASSID3,
+    ASSID4,
+    ASSID5,
+    ASSNAME1,
+    ASSNAME2,
+    ASSNAME3,
+    ASSNAME4,
+    ASSNAME5,
+    BOT_ID,
+    BOT_NAME,
+    LOG_CLIENT,
+    OWNER_ID,
+    app,
+)
 from Alexa.Core.Clients.cli import LOG_CLIENT
-from Alexa.Core.PyTgCalls.Alexa import (pytgcalls1, pytgcalls2, pytgcalls3,
-                                        pytgcalls4, pytgcalls5)
-from Alexa.Database import (get_active_chats, get_active_video_chats,
-                            get_sudoers, is_on_off, remove_active_chat,
-                            remove_active_video_chat)
+from Alexa.Core.PyTgCalls.Alexa import (
+    pytgcalls1,
+    pytgcalls2,
+    pytgcalls3,
+    pytgcalls4,
+    pytgcalls5,
+)
+from Alexa.Database import (
+    get_active_chats,
+    get_active_video_chats,
+    get_sudoers,
+    is_on_off,
+    remove_active_chat,
+    remove_active_video_chat,
+)
 from Alexa.Inline import private_panel
 from Alexa.Plugins import ALL_MODULES
 from Alexa.Utilities.inline import paginate_modules
@@ -58,9 +91,7 @@ async def initiate_bot():
                 await remove_active_chat(chat_id)
         except Exception as e:
             pass
-        status.update(
-            status="[bold blue]Scanning for Plugins", spinner="earth"
-        )
+        status.update(status="[bold blue]Scanning for Plugins", spinner="earth")
         console.print("Found {} Plugins".format(len(ALL_MODULES)) + "\n")
         status.update(
             status="[bold red]Importing Plugins...",
@@ -68,21 +99,11 @@ async def initiate_bot():
             spinner_style="yellow",
         )
         for all_module in ALL_MODULES:
-            imported_module = importlib.import_module(
-                "Alexa.Plugins." + all_module
-            )
-            if (
-                hasattr(imported_module, "__MODULE__")
-                and imported_module.__MODULE__
-            ):
+            imported_module = importlib.import_module("Alexa.Plugins." + all_module)
+            if hasattr(imported_module, "__MODULE__") and imported_module.__MODULE__:
                 imported_module.__MODULE__ = imported_module.__MODULE__
-                if (
-                    hasattr(imported_module, "__HELP__")
-                    and imported_module.__HELP__
-                ):
-                    HELPABLE[
-                        imported_module.__MODULE__.lower()
-                    ] = imported_module
+                if hasattr(imported_module, "__HELP__") and imported_module.__HELP__:
+                    HELPABLE[imported_module.__MODULE__.lower()] = imported_module
             console.print(
                 f">> [bold cyan]Successfully imported: [green]{all_module}.py"
             )
@@ -90,9 +111,7 @@ async def initiate_bot():
         status.update(
             status="[bold blue]Importation Completed!",
         )
-    console.print(
-        "[bold green]ᴄᴏɴɢʀᴀᴛs Alexa ᴍᴜsɪᴄ ʙᴏᴛ ʜᴀs sᴛᴀʀᴛᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ 🌸✨\n"
-    )
+    console.print("[bold green]ᴄᴏɴɢʀᴀᴛs Alexa ᴍᴜsɪᴄ ʙᴏᴛ ʜᴀs sᴛᴀʀᴛᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ 🌸✨\n")
     try:
         await app.send_message(
             LOG_GROUP_ID,
@@ -262,9 +281,7 @@ async def start_command(_, message):
             for x in OWNER_ID:
                 try:
                     user = await app.get_users(x)
-                    user = (
-                        user.first_name if not user.mention else user.mention
-                    )
+                    user = user.first_name if not user.mention else user.mention
                     sex += 1
                 except Exception:
                     continue
@@ -274,11 +291,7 @@ async def start_command(_, message):
                 if user_id not in OWNER_ID:
                     try:
                         user = await app.get_users(user_id)
-                        user = (
-                            user.first_name
-                            if not user.mention
-                            else user.mention
-                        )
+                        user = user.first_name if not user.mention else user.mention
                         if smex == 0:
                             smex += 1
                             text += "\n⭐️<u> **Sudo Users:**</u>\n"
@@ -339,9 +352,7 @@ async def start_command(_, message):
                         InlineKeyboardButton(
                             text="🎥 ᴡᴀᴛᴄʜ ʏᴏᴜᴛᴜʙᴇ ᴠɪᴅᴇᴏ", url=f"{link}"
                         ),
-                        InlineKeyboardButton(
-                            text="🔄 ᴄʟᴏsᴇ", callback_data="close"
-                        ),
+                        InlineKeyboardButton(text="🔄 ᴄʟᴏsᴇ", callback_data="close"),
                     ],
                 ]
             )
@@ -416,20 +427,14 @@ async def help_button(client, query):
     if mod_match:
         module = mod_match.group(1)
         text = (
-            "{} **{}**:\n".format(
-                "Here is the help for", HELPABLE[module].__MODULE__
-            )
+            "{} **{}**:\n".format("Here is the help for", HELPABLE[module].__MODULE__)
             + HELPABLE[module].__HELP__
         )
         key = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(
-                        text="↪️ ʙᴀᴄᴋ", callback_data="help_back"
-                    ),
-                    InlineKeyboardButton(
-                        text="🔄 ᴄʟᴏsᴇ", callback_data="close"
-                    ),
+                    InlineKeyboardButton(text="↪️ ʙᴀᴄᴋ", callback_data="help_back"),
+                    InlineKeyboardButton(text="🔄 ᴄʟᴏsᴇ", callback_data="close"),
                 ],
             ]
         )
@@ -470,9 +475,7 @@ async def help_button(client, query):
     elif back_match:
         await query.message.edit(
             text=top_text,
-            reply_markup=InlineKeyboardMarkup(
-                paginate_modules(0, HELPABLE, "help")
-            ),
+            reply_markup=InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help")),
             disable_web_page_preview=True,
         )
 

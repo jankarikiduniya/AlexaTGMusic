@@ -9,10 +9,15 @@ import random
 
 from pyrogram import filters
 from pyrogram.raw.functions.messages import DeleteHistory
-from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
-                            InlineKeyboardMarkup, InlineQueryResultArticle,
-                            InlineQueryResultPhoto, InputTextMessageContent,
-                            Message)
+from pyrogram.types import (
+    CallbackQuery,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    InlineQueryResultArticle,
+    InlineQueryResultPhoto,
+    InputTextMessageContent,
+    Message,
+)
 
 from Alexa import SUDOERS, app, random_assistant
 from Alexa.Database import get_assistant, save_assistant

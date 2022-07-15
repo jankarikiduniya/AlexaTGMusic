@@ -17,8 +17,12 @@ from time import time
 
 from pyrogram import filters
 from pyrogram.errors import MessageNotModified
-from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup,
-                            Message, ReplyKeyboardMarkup)
+from pyrogram.types import (
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    Message,
+    ReplyKeyboardMarkup,
+)
 
 from Alexa import SUDOERS, app
 from Alexa.Utilities.tasks import add_task, rm_task
@@ -105,13 +109,7 @@ async def executor(client, message):
             out_file.write(str(evaluation.strip()))
         t2 = time()
         keyboard = InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        text="⏳", callback_data=f"runtime {t2-t1} Seconds"
-                    )
-                ]
-            ]
+            [[InlineKeyboardButton(text="⏳", callback_data=f"runtime {t2-t1} Seconds")]]
         )
         await message.reply_document(
             document=filename,

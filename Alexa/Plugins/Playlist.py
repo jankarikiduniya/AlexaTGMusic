@@ -6,20 +6,37 @@
 
 
 from pyrogram import filters
-from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup,
-                            KeyboardButton, Message, ReplyKeyboardMarkup,
-                            ReplyKeyboardRemove)
+from pyrogram.types import (
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    KeyboardButton,
+    Message,
+    ReplyKeyboardMarkup,
+    ReplyKeyboardRemove,
+)
 
 from Alexa import BOT_ID, BOT_USERNAME, MUSIC_BOT_NAME, SUDOERS, app, db_mem
-from Alexa.Database import (_get_playlists, delete_playlist, get_playlist,
-                            get_playlist_names, save_playlist)
+from Alexa.Database import (
+    _get_playlists,
+    delete_playlist,
+    get_playlist,
+    get_playlist_names,
+    save_playlist,
+)
 from Alexa.Decorators.admins import AdminRightsCheck
 from Alexa.Decorators.assistant import AssistantAdd
 from Alexa.Decorators.checker import checker, checkerCB
-from Alexa.Inline import (add_genre_markup, check_genre_markup, check_markup,
-                          delete_playlist_markuup, download_markup,
-                          others_markup, play_genre_playlist, playlist_markup,
-                          third_playlist_markup)
+from Alexa.Inline import (
+    add_genre_markup,
+    check_genre_markup,
+    check_markup,
+    delete_playlist_markuup,
+    download_markup,
+    others_markup,
+    play_genre_playlist,
+    playlist_markup,
+    third_playlist_markup,
+)
 
 __MODULE__ = "⏯️ ᴘʟᴀʏʟɪsᴛ"
 __HELP__ = """
@@ -101,9 +118,7 @@ async def play_playlist_cmd(_, message):
         third_name = message.reply_to_message.from_user.first_name
         user_id = message.from_user.id
         user_name = message.from_user.first_name
-        buttons = third_playlist_markup(
-            user_name, user_id, third_name, userid, "abcd"
-        )
+        buttons = third_playlist_markup(user_name, user_id, third_name, userid, "abcd")
         hmo = await message.reply_photo(
             photo=thumb,
             caption=(
@@ -200,9 +215,7 @@ async def del_cmd(_, message):
     else:
         _playlist = await get_playlist_names(message.from_user.id, genre)
     if not _playlist:
-        await message.reply_text(
-            f"You have no Playlist on {MUSIC_BOT_NAME}'s Server"
-        )
+        await message.reply_text(f"You have no Playlist on {MUSIC_BOT_NAME}'s Server")
     else:
         titlex = []
         j = 0
@@ -211,9 +224,7 @@ async def del_cmd(_, message):
             j += 1
             _note = await get_playlist(message.from_user.id, note, genre)
             if j == count:
-                deleted = await delete_playlist(
-                    message.from_user.id, note, genre
-                )
+                deleted = await delete_playlist(message.from_user.id, note, genre)
                 if deleted:
                     return await message.reply_text(
                         f"**Deleted the {count} music in playlist**"
@@ -248,9 +259,7 @@ async def delgroupplaylist(_, message):
     else:
         _playlist = await get_playlist_names(message.chat.id, genre)
     if not _playlist:
-        await message.reply_text(
-            f"You have no Playlist on {MUSIC_BOT_NAME}'s Server"
-        )
+        await message.reply_text(f"You have no Playlist on {MUSIC_BOT_NAME}'s Server")
     else:
         titlex = []
         j = 0
