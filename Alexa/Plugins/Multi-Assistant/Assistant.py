@@ -9,17 +9,36 @@ from inspect import getfullargspec
 
 from pyrogram import Client, filters
 from pyrogram.raw.functions.messages import DeleteHistory
-from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
-                            InlineKeyboardMarkup, InlineQueryResultArticle,
-                            InlineQueryResultPhoto, InputTextMessageContent,
-                            Message)
+from pyrogram.types import (
+    CallbackQuery,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    InlineQueryResultArticle,
+    InlineQueryResultPhoto,
+    InputTextMessageContent,
+    Message,
+)
 
-from Alexa import (ASS_CLI_1, ASS_CLI_2, ASS_CLI_3, ASS_CLI_4, ASS_CLI_5,
-                   BOT_ID, BOT_USERNAME, LOG_GROUP_ID,
-                   MUSIC_BOT_NAME, SUDOERS, app)
-from Alexa.Database import (approve_pmpermit, disapprove_pmpermit, is_on_off,
-                            is_pmpermit_approved)
-from Alexa.Utilities.command import commandpro                           
+from Alexa import (
+    ASS_CLI_1,
+    ASS_CLI_2,
+    ASS_CLI_3,
+    ASS_CLI_4,
+    ASS_CLI_5,
+    BOT_ID,
+    BOT_USERNAME,
+    LOG_GROUP_ID,
+    MUSIC_BOT_NAME,
+    SUDOERS,
+    app,
+)
+from Alexa.Database import (
+    approve_pmpermit,
+    disapprove_pmpermit,
+    is_on_off,
+    is_pmpermit_approved,
+)
+from Alexa.Utilities.command import commandpro
 
 flood = {}
 
@@ -75,9 +94,7 @@ async def awaiting_message(client, message):
 )
 async def pm_approve(client, message):
     if not message.reply_to_message:
-        return await eor(
-            message, text="Reply to a user's message to approve."
-        )
+        return await eor(message, text="Reply to a user's message to approve.")
     user_id = message.reply_to_message.from_user.id
     if await is_pmpermit_approved(user_id):
         return await eor(message, text="User is already approved to pm")
@@ -94,9 +111,7 @@ async def pm_approve(client, message):
 )
 async def pm_disapprove(client, message):
     if not message.reply_to_message:
-        return await eor(
-            message, text="Reply to a user's message to disapprove."
-        )
+        return await eor(message, text="Reply to a user's message to disapprove.")
     user_id = message.reply_to_message.from_user.id
     if not await is_pmpermit_approved(user_id):
         await eor(message, text="User is already disapproved to pm")
@@ -135,9 +150,7 @@ async def block_user_func(client, message):
 )
 async def unblock_user_func(client, message):
     if not message.reply_to_message:
-        return await eor(
-            message, text="Reply to a user's message to unblock."
-        )
+        return await eor(message, text="Reply to a user's message to unblock.")
     user_id = message.reply_to_message.from_user.id
     await client.unblock_user(user_id)
     await eor(message, text="Successfully Unblocked the user")

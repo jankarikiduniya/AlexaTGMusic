@@ -39,9 +39,7 @@ def checkerCB(mystic):
     async def wrapper(_, CallbackQuery):
         blacklisted_chats_list = await blacklisted_chats()
         if CallbackQuery.message.chat.id in blacklisted_chats_list:
-            return await CallbackQuery.answer(
-                "**ʙʟᴀᴄᴋʟɪsᴛᴇᴅ ᴄʜᴀᴛ**", show_alert=True
-            )
+            return await CallbackQuery.answer("**ʙʟᴀᴄᴋʟɪsᴛᴇᴅ ᴄʜᴀᴛ**", show_alert=True)
         if await is_on_off(1):
             if int(CallbackQuery.message.chat.id) != int(LOG_GROUP_ID):
                 return await CallbackQuery.answer(
@@ -49,9 +47,7 @@ def checkerCB(mystic):
                     show_alert=True,
                 )
         if await is_gbanned_user(CallbackQuery.from_user.id):
-            return await CallbackQuery.answer(
-                "**ʏᴏᴜ'ʀᴇ ɢʙᴀɴɴᴇᴅ** 😜", show_alert=True
-            )
+            return await CallbackQuery.answer("**ʏᴏᴜ'ʀᴇ ɢʙᴀɴɴᴇᴅ** 😜", show_alert=True)
         return await mystic(_, CallbackQuery)
 
     return wrapper

@@ -5,7 +5,6 @@
 # Harshit Sharma
 
 
-
 import asyncio
 import time
 from datetime import datetime, timedelta
@@ -51,9 +50,7 @@ async def telegram_download(message, mystic):
                 await mystic.edit(text)
             except FloodWait as e:
                 await asyncio.sleep(e.x)
-            left_time[message.message_id] = datetime.now() + timedelta(
-                seconds=5
-            )
+            left_time[message.message_id] = datetime.now() + timedelta(seconds=5)
 
     speed_counter[message.message_id] = time.time()
     left_time[message.message_id] = datetime.now()

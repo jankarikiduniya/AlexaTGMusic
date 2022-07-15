@@ -5,8 +5,6 @@
 # Harshit Sharma
 
 
-
-
 import random
 
 from Alexa.Database import get_theme

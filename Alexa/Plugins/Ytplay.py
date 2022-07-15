@@ -9,23 +9,33 @@ import asyncio
 from os import path
 
 from pyrogram import filters
-from pyrogram.types import (InlineKeyboardMarkup, InputMediaPhoto, Message,
-                            Voice)
+from pyrogram.types import InlineKeyboardMarkup, InputMediaPhoto, Message, Voice
 from youtube_search import YoutubeSearch
 
 import Alexa
-from Alexa import (BOT_USERNAME, DURATION_LIMIT, DURATION_LIMIT_MIN,
-                   MUSIC_BOT_NAME, app, db_mem)
+from Alexa import (
+    BOT_USERNAME,
+    DURATION_LIMIT,
+    DURATION_LIMIT_MIN,
+    MUSIC_BOT_NAME,
+    app,
+    db_mem,
+)
 from Alexa.Core.PyTgCalls.Converter import convert
 from Alexa.Core.PyTgCalls.Downloader import download
 from Alexa.Core.PyTgCalls.Tgdownloader import telegram_download
-from Alexa.Database import (get_active_video_chats, get_video_limit,
-                            is_active_video_chat)
+from Alexa.Database import get_active_video_chats, get_video_limit, is_active_video_chat
 from Alexa.Decorators.assistant import AssistantAdd
 from Alexa.Decorators.checker import checker
 from Alexa.Decorators.logger import logging
-from Alexa.Inline import (livestream_markup, playlist_markup, search_markup,
-                          search_markup2, url_markup, url_markup2)
+from Alexa.Inline import (
+    livestream_markup,
+    playlist_markup,
+    search_markup,
+    search_markup2,
+    url_markup,
+    url_markup2,
+)
 from Alexa.Utilities.changers import seconds_to_min, time_to_seconds
 from Alexa.Utilities.chat import specialfont_to_normal
 from Alexa.Utilities.command import commandpro
@@ -34,8 +44,11 @@ from Alexa.Utilities.theme import check_theme
 from Alexa.Utilities.thumbnails import gen_thumb
 from Alexa.Utilities.url import get_url
 from Alexa.Utilities.videostream import start_stream_video
-from Alexa.Utilities.youtube import (get_yt_info_id, get_yt_info_query,
-                                     get_yt_info_query_slider)
+from Alexa.Utilities.youtube import (
+    get_yt_info_id,
+    get_yt_info_query,
+    get_yt_info_query_slider,
+)
 
 loop = asyncio.get_event_loop()
 
@@ -66,9 +79,7 @@ async def play(_, message: Message):
     )
     url = get_url(message)
     if audio:
-        mystic = await message.reply_text(
-            "🔄 Processing Audio... Please Wait!"
-        )
+        mystic = await message.reply_text("🔄 Processing Audio... Please Wait!")
         try:
             read = db_mem[message.chat.id]["live_check"]
             if read:
@@ -80,9 +91,7 @@ async def play(_, message: Message):
         except:
             pass
         if audio.file_size > 1073741824:
-            return await mystic.edit_text(
-                "Audio File Size Should Be Less Than 150 mb"
-            )
+            return await mystic.edit_text("Audio File Size Should Be Less Than 150 mb")
         duration_min = seconds_to_min(audio.duration)
         duration_sec = audio.duration
         if (audio.duration) > DURATION_LIMIT:
@@ -127,9 +136,7 @@ async def play(_, message: Message):
                 return await message.reply_text(
                     "Sorry! Bot only allows limited number of video calls due to CPU overload issues. Many other chats are using video call right now. Try switching to audio or try again later"
                 )
-        mystic = await message.reply_text(
-            "🔄 Processing Video... Please Wait!"
-        )
+        mystic = await message.reply_text("🔄 Processing Video... Please Wait!")
         try:
             read = db_mem[message.chat.id]["live_check"]
             if read:
@@ -190,9 +197,7 @@ async def play(_, message: Message):
             videoid,
         ) = get_yt_info_query(query)
         await mystic.delete()
-        buttons = url_markup(
-            videoid, duration_min, message.from_user.id, query, 0
-        )
+        buttons = url_markup(videoid, duration_min, message.from_user.id, query, 0)
         return await message.reply_photo(
             photo=thumb,
             caption=f"📎Title: **{title}\n\n⏳Duration:** {duration_min} Mins\n\n__[Get Additional Information About Video](https://t.me/{BOT_USERNAME}?start=info_{videoid})__",
@@ -240,9 +245,7 @@ async def Music_Stream(_, CallbackQuery):
     mystic = await CallbackQuery.message.reply_text(
         f"**{MUSIC_BOT_NAME} Downloader**\n\n**Title:** {title[:50]}\n\n0% ▓▓▓▓▓▓▓▓▓▓▓▓ 100%"
     )
-    downloaded_file = await loop.run_in_executor(
-        None, download, videoid, mystic, title
-    )
+    downloaded_file = await loop.run_in_executor(None, download, videoid, mystic, title)
     raw_path = await convert(downloaded_file)
     theme = await check_theme(chat_id)
     chat_title = await specialfont_to_normal(chat_title)
@@ -378,9 +381,7 @@ async def slider_query_results(_, CallbackQuery):
             thumb,
             videoid,
         ) = get_yt_info_query_slider(query, query_type)
-        buttons = url_markup(
-            videoid, duration_min, user_id, query, query_type
-        )
+        buttons = url_markup(videoid, duration_min, user_id, query, query_type)
         med = InputMediaPhoto(
             media=thumb,
             caption=f"📎Title: **[{title[:20]}]\n\n⏳Duration:** {duration_min} Mins\n\n__[Get Additional Information About Video](https://t.me/{BOT_USERNAME}?start=info_{videoid})__",
@@ -401,9 +402,7 @@ async def slider_query_results(_, CallbackQuery):
             thumb,
             videoid,
         ) = get_yt_info_query_slider(query, query_type)
-        buttons = url_markup(
-            videoid, duration_min, user_id, query, query_type
-        )
+        buttons = url_markup(videoid, duration_min, user_id, query, query_type)
         med = InputMediaPhoto(
             media=thumb,
             caption=f"📎Title: **[{title[:20]}]\n\n⏳Duration:** {duration_min} Mins\n\n__[Get Additional Information About Video](https://t.me/{BOT_USERNAME}?start=info_{videoid})__",

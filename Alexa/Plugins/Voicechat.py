@@ -5,7 +5,6 @@
 # Harshit Sharma
 
 
-
 import asyncio
 import os
 import shutil
@@ -13,15 +12,19 @@ import subprocess
 from sys import version as pyver
 
 from pyrogram import Client, filters
-from pyrogram.types import (InlineKeyboardMarkup, InputMediaPhoto, Message,
-                            Voice)
+from pyrogram.types import InlineKeyboardMarkup, InputMediaPhoto, Message, Voice
 
 from config import get_queue
 from Alexa import SUDOERS, app, db_mem, random_assistant
-from Alexa.Database import (get_active_chats, get_active_video_chats,
-                            get_assistant, is_active_chat, save_assistant)
+from Alexa.Database import (
+    get_active_chats,
+    get_active_video_chats,
+    get_assistant,
+    is_active_chat,
+    save_assistant,
+)
 from Alexa.Decorators.checker import checker, checkerCB
-from Alexa.Inline import primary_markup,choose_markup
+from Alexa.Inline import primary_markup, choose_markup
 from Alexa.Utilities.assistant import get_assistant_details
 
 loop = asyncio.get_event_loop()
@@ -46,6 +49,7 @@ __HELP__ = """
 
 - ᴘᴏᴡᴇʀᴅ ʙʏ 😍 ʀᴏᴄᴋs ᴀɴᴅ @AsadSupport.
 """
+
 
 @app.on_callback_query(filters.regex("gback_list_chose_stream"))
 async def gback_list_chose_stream(_, CallbackQuery):
@@ -94,9 +98,7 @@ async def timer_checkup_markup(_, CallbackQuery):
             )
         return await CallbackQuery.answer(f"ɴᴏᴛ ᴘʟᴀʏɪɴɢ...", show_alert=True)
     else:
-        return await CallbackQuery.answer(
-            f"ɴᴏ ᴀᴄᴛɪᴠᴇ ᴠᴏɪᴄᴇ ᴄʜᴀᴛ", show_alert=True
-        )
+        return await CallbackQuery.answer(f"ɴᴏ ᴀᴄᴛɪᴠᴇ ᴠᴏɪᴄᴇ ᴄʜᴀᴛ", show_alert=True)
 
 
 @app.on_message(filters.command("queue"))
@@ -168,9 +170,7 @@ async def activevc(_, message: Message):
             title = "Private Group"
         if (await app.get_chat(x)).username:
             user = (await app.get_chat(x)).username
-            text += (
-                f"<b>{j + 1}.</b>  [{title}](https://t.me/{user})[`{x}`]\n"
-            )
+            text += f"<b>{j + 1}.</b>  [{title}](https://t.me/{user})[`{x}`]\n"
         else:
             text += f"<b>{j + 1}. {title}</b> [`{x}`]\n"
         j += 1
@@ -201,9 +201,7 @@ async def activevi_(_, message: Message):
             title = "Private Group"
         if (await app.get_chat(x)).username:
             user = (await app.get_chat(x)).username
-            text += (
-                f"<b>{j + 1}.</b>  [{title}](https://t.me/{user})[`{x}`]\n"
-            )
+            text += f"<b>{j + 1}.</b>  [{title}](https://t.me/{user})[`{x}`]\n"
         else:
             text += f"<b>{j + 1}. {title}</b> [`{x}`]\n"
         j += 1
@@ -237,9 +235,7 @@ async def basffy(_, message):
         )
     else:
         ran_ass = _assistant["saveassistant"]
-    ASS_ID, ASS_NAME, ASS_USERNAME, ASS_ACC = await get_assistant_details(
-        ran_ass
-    )
+    ASS_ID, ASS_NAME, ASS_USERNAME, ASS_ACC = await get_assistant_details(ran_ass)
     try:
         await ASS_ACC.join_chat(chat_id)
     except Exception as e:
@@ -251,9 +247,7 @@ async def basffy(_, message):
 @app.on_message(filters.command("leavebot") & filters.user(SUDOERS))
 async def baaaf(_, message):
     if len(message.command) != 2:
-        await message.reply_text(
-            "**ᴜsᴀɢᴇ:**\n`/leavebot` [ᴄʜᴀᴛ ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ᴄʜᴀᴛ ɪᴅ]"
-        )
+        await message.reply_text("**ᴜsᴀɢᴇ:**\n`/leavebot` [ᴄʜᴀᴛ ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ᴄʜᴀᴛ ɪᴅ]")
         return
     chat = message.text.split(None, 2)[1]
     try:
@@ -268,9 +262,7 @@ async def baaaf(_, message):
 @app.on_message(filters.command(["leave", "leaveassistant"]) & filters.user(SUDOERS))
 async def baujaf(_, message):
     if len(message.command) != 2:
-        await message.reply_text(
-            "**ᴜsᴀɢᴇ:**\n`/leave` [ᴄʜᴀᴛ ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ᴄʜᴀᴛ ɪᴅ]"
-        )
+        await message.reply_text("**ᴜsᴀɢᴇ:**\n`/leave` [ᴄʜᴀᴛ ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ᴄʜᴀᴛ ɪᴅ]")
         return
     chat = message.text.split(None, 2)[1]
     try:
@@ -286,9 +278,7 @@ async def baujaf(_, message):
         )
     else:
         ran_ass = _assistant["saveassistant"]
-    ASS_ID, ASS_NAME, ASS_USERNAME, ASS_ACC = await get_assistant_details(
-        ran_ass
-    )
+    ASS_ID, ASS_NAME, ASS_USERNAME, ASS_ACC = await get_assistant_details(ran_ass)
     try:
         await ASS_ACC.leave_chat(chat_id)
     except Exception as e:

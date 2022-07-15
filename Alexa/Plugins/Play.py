@@ -9,23 +9,33 @@ import asyncio
 from os import path
 
 from pyrogram import filters
-from pyrogram.types import (InlineKeyboardMarkup, InputMediaPhoto, Message,
-                            Voice)
+from pyrogram.types import InlineKeyboardMarkup, InputMediaPhoto, Message, Voice
 from youtube_search import YoutubeSearch
 
 import Alexa
-from Alexa import (BOT_USERNAME, DURATION_LIMIT, DURATION_LIMIT_MIN,
-                   MUSIC_BOT_NAME, app, db_mem)
+from Alexa import (
+    BOT_USERNAME,
+    DURATION_LIMIT,
+    DURATION_LIMIT_MIN,
+    MUSIC_BOT_NAME,
+    app,
+    db_mem,
+)
 from Alexa.Core.PyTgCalls.Converter import convert
 from Alexa.Core.PyTgCalls.Downloader import download
 from Alexa.Core.PyTgCalls.Tgdownloader import telegram_download
-from Alexa.Database import (get_active_video_chats, get_video_limit,
-                            is_active_video_chat)
+from Alexa.Database import get_active_video_chats, get_video_limit, is_active_video_chat
 from Alexa.Decorators.assistant import AssistantAdd
 from Alexa.Decorators.checker import checker
 from Alexa.Decorators.logger import logging
-from Alexa.Inline import (livestream_markup, playlist_markup, search_markup,
-                          search_markup2, url_markup, url_markup2)
+from Alexa.Inline import (
+    livestream_markup,
+    playlist_markup,
+    search_markup,
+    search_markup2,
+    url_markup,
+    url_markup2,
+)
 from Alexa.Utilities.changers import seconds_to_min, time_to_seconds
 from Alexa.Utilities.chat import specialfont_to_normal
 from Alexa.Utilities.command import commandpro
@@ -34,10 +44,14 @@ from Alexa.Utilities.theme import check_theme
 from Alexa.Utilities.thumbnails import gen_thumb
 from Alexa.Utilities.url import get_url
 from Alexa.Utilities.videostream import start_stream_video
-from Alexa.Utilities.youtube import (get_yt_info_id, get_yt_info_query,
-                                     get_yt_info_query_slider)
+from Alexa.Utilities.youtube import (
+    get_yt_info_id,
+    get_yt_info_query,
+    get_yt_info_query_slider,
+)
 
 from Alexa.Utilities.func import mplay_stream, vplay_stream
+
 
 @app.on_message(
     commandpro(["/p", "Play", "/play", "/play@{BOT_USERNAME}"]) & filters.group
@@ -45,7 +59,7 @@ from Alexa.Utilities.func import mplay_stream, vplay_stream
 @checker
 @logging
 @AssistantAdd
-async def mplayaa(_, message: Message):    
+async def mplayaa(_, message: Message):
     await message.delete()
     if message.chat.id not in db_mem:
         db_mem[message.chat.id] = {}
@@ -65,9 +79,7 @@ async def mplayaa(_, message: Message):
     )
     url = get_url(message)
     if audio:
-        mystic = await message.reply_text(
-            "🔄 ᴘʀᴏᴄᴇssɪɴɢ ᴀᴜᴅɪᴏ...."
-        )
+        mystic = await message.reply_text("🔄 ᴘʀᴏᴄᴇssɪɴɢ ᴀᴜᴅɪᴏ....")
         try:
             read = db_mem[message.chat.id]["live_check"]
             if read:
@@ -79,9 +91,7 @@ async def mplayaa(_, message: Message):
         except:
             pass
         if audio.file_size > 1073741824:
-            return await mystic.edit_text(
-                "ᴀᴜᴅɪᴏ ғɪʟᴇ sɪᴢᴇ sʜᴏᴜʟᴅ ʙᴇ ʟᴇss ᴛʜᴀɴ 𝟷𝟻𝟶 ᴍʙ"
-            )
+            return await mystic.edit_text("ᴀᴜᴅɪᴏ ғɪʟᴇ sɪᴢᴇ sʜᴏᴜʟᴅ ʙᴇ ʟᴇss ᴛʜᴀɴ 𝟷𝟻𝟶 ᴍʙ")
         duration_min = seconds_to_min(audio.duration)
         duration_sec = audio.duration
         if (audio.duration) > DURATION_LIMIT:
@@ -113,7 +123,9 @@ async def mplayaa(_, message: Message):
             mystic,
         )
     elif video:
-        return await message.reply_text("ᴜsᴇ `/play` ᴏʀ `/vplay` ᴄᴏᴍᴍᴀɴᴅs ᴛᴏ ᴘʟᴀʏ ᴀᴜᴅɪᴏ ᴏʀ ᴠɪᴅᴇᴏ ɪɴ ᴠᴏɪᴄᴇ ᴄʜᴀᴛ...")
+        return await message.reply_text(
+            "ᴜsᴇ `/play` ᴏʀ `/vplay` ᴄᴏᴍᴍᴀɴᴅs ᴛᴏ ᴘʟᴀʏ ᴀᴜᴅɪᴏ ᴏʀ ᴠɪᴅᴇᴏ ɪɴ ᴠᴏɪᴄᴇ ᴄʜᴀᴛ..."
+        )
     elif url:
         mystic = await message.reply_text("🔄 ᴘʀᴏᴄᴇssɪɴɢ ᴜʀʟ....")
         if not message.reply_to_message:
@@ -127,9 +139,9 @@ async def mplayaa(_, message: Message):
             thumb,
             videoid,
         ) = get_yt_info_query(query)
-        await mystic.delete()        
+        await mystic.delete()
         MusicData = f"MusicStream {videoid}|{duration_min}|{message.from_user.id}"
-        return await mplay_stream(message,MusicData)
+        return await mplay_stream(message, MusicData)
     else:
         if len(message.command) < 2:
             buttons = playlist_markup(
@@ -154,7 +166,7 @@ async def mplayaa(_, message: Message):
         ) = get_yt_info_query(query)
         await mystic.delete()
         MusicData = f"MusicStream {videoid}|{duration_min}|{message.from_user.id}"
-        return await mplay_stream(message,MusicData)
+        return await mplay_stream(message, MusicData)
 
 
 @app.on_message(
@@ -183,7 +195,9 @@ async def vplayaaa(_, message: Message):
     )
     url = get_url(message)
     if audio:
-        return await message.reply_text("ᴜsᴇ `/play` ᴏʀ `/vplay` ᴄᴏᴍᴍᴀɴᴅs ᴛᴏ ᴘʟᴀʏ ᴀᴜᴅɪᴏ ᴏʀ ᴠɪᴅᴇᴏ ɪɴ ᴠᴏɪᴄᴇ ᴄʜᴀᴛ...")
+        return await message.reply_text(
+            "ᴜsᴇ `/play` ᴏʀ `/vplay` ᴄᴏᴍᴍᴀɴᴅs ᴛᴏ ᴘʟᴀʏ ᴀᴜᴅɪᴏ ᴏʀ ᴠɪᴅᴇᴏ ɪɴ ᴠᴏɪᴄᴇ ᴄʜᴀᴛ..."
+        )
     elif video:
         limit = await get_video_limit(141414)
         if not limit:
@@ -198,15 +212,11 @@ async def vplayaaa(_, message: Message):
                 return await message.reply_text(
                     "**sᴏʀʀʏ ʙᴏᴛ ᴏɴʟʏ ᴀʟʟᴏᴡs ʟɪᴍɪᴛᴇᴅ ɴᴜᴍʙᴇʀ ᴏғ ᴠɪᴅᴇᴏ ᴄᴀʟʟs ᴅᴜᴇ ᴛᴏ ᴄᴘᴜ ᴏᴠᴇʀʟᴏᴀᴅ ɪssᴜᴇs. ᴍᴀɴʏ ᴏᴛʜᴇʀ ᴄʜᴀᴛs ᴀʀᴇ ᴜsɪɴɢ ᴠɪᴅᴇᴏ ᴄᴀʟʟ ʀɪɢʜᴛ ɴᴏᴡ. ᴛʀʏ sᴡɪᴛᴄʜɪɴɢ ᴛᴏ ᴀᴜᴅɪᴏ ᴏʀ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ**..."
                 )
-        mystic = await message.reply_text(
-            "🔄 ᴘʀᴏᴄᴇssɪɴɢ ᴠɪᴅᴇᴏ..."
-        )
+        mystic = await message.reply_text("🔄 ᴘʀᴏᴄᴇssɪɴɢ ᴠɪᴅᴇᴏ...")
         try:
             read = db_mem[message.chat.id]["live_check"]
             if read:
-                return await mystic.edit(
-                    "ʟɪᴠᴇs sᴛʀᴇᴀᴍɪɴɢ.../nsᴛᴏᴘ ɪᴛ ᴛᴏ ᴘʟᴀʏ ᴍᴜsɪᴄ..."
-                )
+                return await mystic.edit("ʟɪᴠᴇs sᴛʀᴇᴀᴍɪɴɢ.../nsᴛᴏᴘ ɪᴛ ᴛᴏ ᴘʟᴀʏ ᴍᴜsɪᴄ...")
             else:
                 pass
         except:
@@ -230,11 +240,11 @@ async def vplayaaa(_, message: Message):
             duration_sec,
             thumb,
             videoid,
-        ) = get_yt_info_query(query)               
-        
+        ) = get_yt_info_query(query)
+
         VideoData = f"ᴄʜᴏᴏsᴇ {videoid}|{duration_min}|{message.from_user.id}"
-        return await vplay_stream(message,VideoData,mystic)
-    else:        
+        return await vplay_stream(message, VideoData, mystic)
+    else:
         if len(message.command) < 2:
             buttons = playlist_markup(
                 message.from_user.first_name, message.from_user.id, "abcd"
@@ -255,6 +265,6 @@ async def vplayaaa(_, message: Message):
             duration_sec,
             thumb,
             videoid,
-        ) = get_yt_info_query(query)       
+        ) = get_yt_info_query(query)
         VideoData = f"ᴄʜᴏᴏsᴇ {videoid}|{duration_min}|{message.from_user.id}"
-        return await vplay_stream(message,VideoData,mystic)
+        return await vplay_stream(message, VideoData, mystic)

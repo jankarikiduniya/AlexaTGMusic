@@ -5,7 +5,6 @@
 # Harshit Sharma
 
 
-
 from typing import Dict, List, Union
 
 from Alexa import db

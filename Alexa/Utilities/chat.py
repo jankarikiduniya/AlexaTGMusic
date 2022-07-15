@@ -5,8 +5,6 @@
 # Harshit Sharma
 
 
-
-
 async def specialfont_to_normal(ctitle):
     string = ctitle
     font1 = list("𝔄𝔅ℭ𝔇𝔈𝔉𝔊ℌℑ𝔍𝔎𝔏𝔐𝔑𝔒𝔓𝔔ℜ𝔖𝔗𝔘𝔙𝔚𝔛𝔜ℨ")

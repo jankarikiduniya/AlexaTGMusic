@@ -5,7 +5,6 @@
 # Harshit Sharma
 
 
-
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
@@ -39,34 +38,26 @@ __HELP__ = """
 @app.on_message(filters.command(["black", "blacklistchat"]) & filters.user(SUDOERS))
 async def blacklist_chat_func(_, message: Message):
     if len(message.command) != 2:
-        return await message.reply_text(
-            "**ᴜsᴀɢᴇ:**\n/blacklistchat [CHAT_ID]"
-        )
+        return await message.reply_text("**ᴜsᴀɢᴇ:**\n/blacklistchat [CHAT_ID]")
     chat_id = int(message.text.strip().split()[1])
     if chat_id in await blacklisted_chats():
         return await message.reply_text("ᴄʜᴀᴛ ɪs ᴀʟʀᴇᴀᴅʏ ʙʟᴀᴄᴋʟɪsᴛᴇᴅ...")
     blacklisted = await blacklist_chat(chat_id)
     if blacklisted:
-        return await message.reply_text(
-            "ᴄʜᴀᴛ ʜᴀs ʙᴇᴇɴ sᴜᴄᴄᴇssғᴜʟʟʏ ʙʟᴀᴄᴋʟɪsᴛᴇᴅ"
-        )
+        return await message.reply_text("ᴄʜᴀᴛ ʜᴀs ʙᴇᴇɴ sᴜᴄᴄᴇssғᴜʟʟʏ ʙʟᴀᴄᴋʟɪsᴛᴇᴅ")
     await message.reply_text("sᴏᴍᴇᴛʜɪɴɢ ᴡʀᴏɴɢ ʜᴀᴘᴘᴇɴᴇᴅ, ᴄʜᴇᴄᴋ ʟᴏɢs...")
 
 
 @app.on_message(filters.command(["white", "whitelistchat"]) & filters.user(SUDOERS))
 async def whitelist_chat_func(_, message: Message):
     if len(message.command) != 2:
-        return await message.reply_text(
-            "**ᴜsᴀɢᴇ:**\n/whitelistchat [CHAT_ID]"
-        )
+        return await message.reply_text("**ᴜsᴀɢᴇ:**\n/whitelistchat [CHAT_ID]")
     chat_id = int(message.text.strip().split()[1])
     if chat_id not in await blacklisted_chats():
         return await message.reply_text("ᴄʜᴀᴛ ɪs ᴀʟʀᴇᴀᴅʏ ᴡʜɪᴛᴇʟɪsᴛᴇᴅ...")
     whitelisted = await whitelist_chat(chat_id)
     if whitelisted:
-        return await message.reply_text(
-            "ᴄʜᴀᴛ ʜᴀs ʙᴇᴇɴ sᴜᴄᴄᴇssғᴜʟʟʏ ᴡʜɪᴛᴇ ʟɪsᴛᴇᴅ..."
-        )
+        return await message.reply_text("ᴄʜᴀᴛ ʜᴀs ʙᴇᴇɴ sᴜᴄᴄᴇssғᴜʟʟʏ ᴡʜɪᴛᴇ ʟɪsᴛᴇᴅ...")
     await message.reply_text("sᴏᴍᴇᴛʜɪɴɢ ᴡʀᴏɴɢ ʜᴀᴘᴘᴇɴᴇᴅ, ᴄʜᴇᴄᴋ ʟᴏɢs...")
 
 

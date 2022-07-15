@@ -5,8 +5,6 @@
 # Harshit Sharma
 
 
-
-
 from math import ceil
 
 from pyrogram.types import InlineKeyboardButton
@@ -31,9 +29,7 @@ def paginate_modules(page_n, module_dict, prefix, chat=None):
             [
                 EqInlineKeyboardButton(
                     x.__MODULE__,
-                    callback_data="{}_module({})".format(
-                        prefix, x.__MODULE__.lower()
-                    ),
+                    callback_data="{}_module({})".format(prefix, x.__MODULE__.lower()),
                 )
                 for x in module_dict.values()
             ]
@@ -73,9 +69,7 @@ def paginate_modules(page_n, module_dict, prefix, chat=None):
 
     # can only have a certain amount of buttons side by side
     if len(pairs) > COLUMN_SIZE:
-        pairs = pairs[
-            modulo_page * COLUMN_SIZE : COLUMN_SIZE * (modulo_page + 1)
-        ] + [
+        pairs = pairs[modulo_page * COLUMN_SIZE : COLUMN_SIZE * (modulo_page + 1)] + [
             (
                 EqInlineKeyboardButton(
                     "❮",

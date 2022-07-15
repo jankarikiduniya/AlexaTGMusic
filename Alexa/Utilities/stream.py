@@ -5,10 +5,6 @@
 # Harshit Sharma
 
 
-
-
-
-
 import asyncio
 import os
 import shutil
@@ -19,10 +15,14 @@ from config import get_queue
 from Alexa import BOT_USERNAME, db_mem
 from Alexa.Core.PyTgCalls import Queues
 from Alexa.Core.PyTgCalls.Alexa import join_stream
-from Alexa.Database import (add_active_chat, add_active_video_chat,
-                            is_active_chat, music_off, music_on)
-from Alexa.Inline import (audio_markup, audio_markup2, primary_markup,
-                          secondary_markup)
+from Alexa.Database import (
+    add_active_chat,
+    add_active_video_chat,
+    is_active_chat,
+    music_off,
+    music_on,
+)
+from Alexa.Inline import audio_markup, audio_markup2, primary_markup, secondary_markup
 from Alexa.Utilities.timer import start_timer
 
 loop = asyncio.get_event_loop()
@@ -45,12 +45,7 @@ async def start_stream(
     wtfbro["live_check"] = False
     if await is_active_chat(CallbackQuery.message.chat.id):
         position = await Queues.put(CallbackQuery.message.chat.id, file=file)
-        _path_ = (
-            (str(file))
-            .replace("_", "", 1)
-            .replace("/", "", 1)
-            .replace(".", "", 1)
-        )
+        _path_ = (str(file)).replace("_", "", 1).replace("/", "", 1).replace(".", "", 1)
         buttons = secondary_markup(videoid, CallbackQuery.from_user.id)
         if file not in db_mem:
             db_mem[file] = {}

@@ -4,29 +4,48 @@ import time
 from asyncio import QueueEmpty
 
 from pyrogram.errors import FloodWait, MessageNotModified
-from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
-                            InlineKeyboardMarkup, KeyboardButton, Message,
-                            ReplyKeyboardMarkup, ReplyKeyboardRemove)
+from pyrogram.types import (
+    CallbackQuery,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    KeyboardButton,
+    Message,
+    ReplyKeyboardMarkup,
+    ReplyKeyboardRemove,
+)
 from pytgcalls import PyTgCalls, StreamType
 from pytgcalls.types import Update
-from pytgcalls.types.input_stream import (AudioVideoPiped, InputAudioStream,
-                                          InputStream)
-from pytgcalls.types.input_stream.quality import (HighQualityAudio,
-                                                  HighQualityVideo,
-                                                  LowQualityVideo,
-                                                  MediumQualityVideo)
+from pytgcalls.types.input_stream import AudioVideoPiped, InputAudioStream, InputStream
+from pytgcalls.types.input_stream.quality import (
+    HighQualityAudio,
+    HighQualityVideo,
+    LowQualityVideo,
+    MediumQualityVideo,
+)
 from pytgcalls.types.stream import StreamAudioEnded, StreamVideoEnded
 
 from config import STRING1, STRING2, STRING3, STRING4, STRING5, get_queue
-from Alexa import (ASS_CLI_1, ASS_CLI_2, ASS_CLI_3, ASS_CLI_4, ASS_CLI_5,
-                   MUSIC_BOT_NAME, app, db_mem)
+from Alexa import (
+    ASS_CLI_1,
+    ASS_CLI_2,
+    ASS_CLI_3,
+    ASS_CLI_4,
+    ASS_CLI_5,
+    MUSIC_BOT_NAME,
+    app,
+    db_mem,
+)
 from Alexa.Core.PyTgCalls import Queues
 from Alexa.Core.PyTgCalls.Converter import convert
 from Alexa.Core.PyTgCalls.Downloader import download
-from Alexa.Database import (get_assistant, remove_active_chat,
-                            remove_active_video_chat)
-from Alexa.Inline import (audio_markup, audio_timer_markup_start,
-                          primary_markup, secondary_markup2, timer_markup)
+from Alexa.Database import get_assistant, remove_active_chat, remove_active_video_chat
+from Alexa.Inline import (
+    audio_markup,
+    audio_timer_markup_start,
+    primary_markup,
+    secondary_markup2,
+    timer_markup,
+)
 from Alexa.Utilities.changers import time_to_seconds
 from Alexa.Utilities.chat import specialfont_to_normal
 from Alexa.Utilities.theme import check_theme
@@ -585,9 +604,7 @@ async def playout_end(pytgclients, chat_id):
                     try:
                         await pytgclients.change_stream(
                             chat_id,
-                            AudioVideoPiped(
-                                ytlink, HighQualityAudio(), stream_quality
-                            ),
+                            AudioVideoPiped(ytlink, HighQualityAudio(), stream_quality),
                         )
                     except:
                         return await app.send_message(
@@ -654,12 +671,8 @@ async def playout_end(pytgclients, chat_id):
                 c_title = db_mem[afk]["chat_title"]
                 user_id = db_mem[afk]["user_id"]
                 chat_title = await specialfont_to_normal(c_title)
-                thumb = await gen_thumb(
-                    thumbnail, title, user_id, theme, chat_title
-                )
-                buttons = primary_markup(
-                    afk, user_id, duration_min, duration_min
-                )
+                thumb = await gen_thumb(thumbnail, title, user_id, theme, chat_title)
+                buttons = primary_markup(afk, user_id, duration_min, duration_min)
                 await mystic.delete()
                 mention = db_mem[afk]["username"]
                 finaltext = await app.send_photo(

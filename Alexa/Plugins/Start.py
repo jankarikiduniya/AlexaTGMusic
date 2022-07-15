@@ -5,7 +5,6 @@
 # Harshit Sharma
 
 
-
 import asyncio
 import random
 import time
@@ -14,21 +13,43 @@ from typing import Dict, List, Union
 
 import psutil
 from pyrogram import filters
-from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
-                            InlineKeyboardMarkup, InputMediaPhoto, Message)
+from pyrogram.types import (
+    CallbackQuery,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    InputMediaPhoto,
+    Message,
+)
 
 from Alexa import ASSIDS, BOT_ID, MUSIC_BOT_NAME, OWNER_ID, SUDOERS, app
 from Alexa import boottime as bot_start_time
 from Alexa import db, random_assistant
 from Alexa.Core.PyTgCalls import Alexa
-from Alexa.Database import (add_nonadmin_chat, add_served_chat,
-                            blacklisted_chats, get_assistant, get_authuser,
-                            get_authuser_names, get_start, is_nonadmin_chat,
-                            is_served_chat, remove_active_chat,
-                            remove_nonadmin_chat, save_assistant, save_start)
+from Alexa.Database import (
+    add_nonadmin_chat,
+    add_served_chat,
+    blacklisted_chats,
+    get_assistant,
+    get_authuser,
+    get_authuser_names,
+    get_start,
+    is_nonadmin_chat,
+    is_served_chat,
+    remove_active_chat,
+    remove_nonadmin_chat,
+    save_assistant,
+    save_start,
+)
 from Alexa.Decorators.admins import ActualAdminCB
-from Alexa.Inline import (custommarkup, dashmarkup, setting_markup,
-                          setting_markup2, start_pannel, usermarkup, volmarkup)
+from Alexa.Inline import (
+    custommarkup,
+    dashmarkup,
+    setting_markup,
+    setting_markup2,
+    start_pannel,
+    usermarkup,
+    volmarkup,
+)
 from Alexa.Utilities.assistant import get_assistant_details
 from Alexa.Utilities.ping import get_readable_time
 
@@ -114,13 +135,13 @@ async def useradd(_, message: Message):
         ),
     )
 
+
 # A Powerful Music Bot Property Of Rocks Indian Largest Chatting Group
 # Without Credit (Mother Fucker)
 # Rocks © @Dr_Asad_Ali © Rocks
-# Copyright (C) 2021 By @Itz_VeNom_xD 
+# Copyright (C) 2021 By @Itz_VeNom_xD
 # Copyright (C) 2021 By @Dr_Asad_Ali
 # Copyright (C) 2021 By @HarshitSharma361
-
 
 
 @app.on_message(filters.command("start") & filters.private & ~filters.edited)
@@ -142,18 +163,25 @@ async def useradd(_, message: Message):
 💞 ɪғ ʏᴏᴜ ʜᴀᴠᴇ ᴀɴʏ ǫᴜᴇsᴛɪᴏɴs ᴛʜᴇɴ
 ᴅᴍ ᴛᴏ ᴍʏ [ʟᴇɢᴇɴᴅ ᴏᴡɴᴇʀ](https://t.me/Dr_Asad_Ali) ...
 ━━━━━━━━━━━━━━━━━━━━━━━━**""",
-   reply_markup=InlineKeyboardMarkup(
+        reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "➕ ❰ ᴀᴅᴅ ᴀʟᴇxᴀ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ❱ ➕", url=f"https://t.me/Asad_Music_Bot?startgroup=true")
+                        "➕ ❰ ᴀᴅᴅ ᴀʟᴇxᴀ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ❱ ➕",
+                        url=f"https://t.me/Asad_Music_Bot?startgroup=true",
+                    )
                 ]
-                
-           ]
+            ]
         ),
     )
 
-@app.on_message(filters.command(["alive", "reload", "alexa"]) & filters.private & ~filters.group & ~filters.edited)
+
+@app.on_message(
+    filters.command(["alive", "reload", "alexa"])
+    & filters.private
+    & ~filters.group
+    & ~filters.edited
+)
 async def useradd(_, message: Message):
     await message.reply_photo(
         photo=f"https://telegra.ph/file/4c7025b0b94c0d2b5f94a.jpg",
@@ -162,14 +190,21 @@ async def useradd(_, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "💥 ᴊᴏɪɴ ʜᴇʀᴇ ᴀɴᴅ sᴜᴘᴘᴏʀᴛ 💞", url=f"https://t.me/Shayri_Music_Lovers")
+                        "💥 ᴊᴏɪɴ ʜᴇʀᴇ ᴀɴᴅ sᴜᴘᴘᴏʀᴛ 💞",
+                        url=f"https://t.me/Shayri_Music_Lovers",
+                    )
                 ]
             ]
         ),
     )
 
 
-@app.on_message(filters.command(["repo", "source"]) & filters.private & ~filters.group & ~filters.edited)
+@app.on_message(
+    filters.command(["repo", "source"])
+    & filters.private
+    & ~filters.group
+    & ~filters.edited
+)
 async def useradd(_, message: Message):
     await message.reply_photo(
         photo=f"https://telegra.ph/file/4c7025b0b94c0d2b5f94a.jpg",
@@ -178,11 +213,13 @@ async def useradd(_, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "💥 ᴄʟɪᴄᴋ ᴍᴇ ᴛᴏ ɢᴇᴛ ʀᴇᴘᴏ 💞", url=f"https://t.me/Dr_Asad_Ali")
+                        "💥 ᴄʟɪᴄᴋ ᴍᴇ ᴛᴏ ɢᴇᴛ ʀᴇᴘᴏ 💞", url=f"https://t.me/Dr_Asad_Ali"
+                    )
                 ]
             ]
         ),
     )
+
 
 @app.on_message(filters.command("settings") & filters.group)
 async def settings(_, message: Message):
@@ -541,9 +578,7 @@ async def start_markup_check(_, CallbackQuery):
             )
             msg = f"**Authorised Users List[AUL]:**\n\n"
             for note in _playlist:
-                _note = await get_authuser(
-                    CallbackQuery.message.chat.id, note
-                )
+                _note = await get_authuser(CallbackQuery.message.chat.id, note)
                 user_id = _note["auth_user_id"]
                 user_name = _note["auth_name"]
                 admin_id = _note["admin_id"]
@@ -562,21 +597,13 @@ async def start_markup_check(_, CallbackQuery):
     if command == "UPT":
         bot_uptimee = int(time.time() - bot_start_time)
         Uptimeee = f"{get_readable_time((bot_uptimee))}"
-        await CallbackQuery.answer(
-            f"Bot's Uptime: {Uptimeee}", show_alert=True
-        )
+        await CallbackQuery.answer(f"Bot's Uptime: {Uptimeee}", show_alert=True)
     if command == "CPT":
         cpue = psutil.cpu_percent(interval=0.5)
-        await CallbackQuery.answer(
-            f"Bot's Cpu Usage: {cpue}%", show_alert=True
-        )
+        await CallbackQuery.answer(f"Bot's Cpu Usage: {cpue}%", show_alert=True)
     if command == "RAT":
         meme = psutil.virtual_memory().percent
-        await CallbackQuery.answer(
-            f"Bot's Memory Usage: {meme}%", show_alert=True
-        )
+        await CallbackQuery.answer(f"Bot's Memory Usage: {meme}%", show_alert=True)
     if command == "DIT":
         diske = psutil.disk_usage("/").percent
-        await CallbackQuery.answer(
-            f"Alexa Disk Usage: {diske}%", show_alert=True
-        )
+        await CallbackQuery.answer(f"Alexa Disk Usage: {diske}%", show_alert=True)

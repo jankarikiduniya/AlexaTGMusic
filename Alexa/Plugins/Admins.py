@@ -5,28 +5,42 @@
 # Harshit Sharma
 
 
-
 import asyncio
 import os
 import random
 from asyncio import QueueEmpty
 
 from pyrogram import filters
-from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
-                            InlineKeyboardMarkup, KeyboardButton, Message,
-                            ReplyKeyboardMarkup, ReplyKeyboardRemove)
+from pyrogram.types import (
+    CallbackQuery,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    KeyboardButton,
+    Message,
+    ReplyKeyboardMarkup,
+    ReplyKeyboardRemove,
+)
 
 from config import get_queue
 from Alexa import BOT_USERNAME, MUSIC_BOT_NAME, app, db_mem
 from Alexa.Core.PyTgCalls import Queues
 from Alexa.Core.PyTgCalls.Converter import convert
 from Alexa.Core.PyTgCalls.Downloader import download
-from Alexa.Core.PyTgCalls.Alexa import (pause_stream, resume_stream,
-                                        skip_stream, skip_video_stream,
-                                        stop_stream)
-from Alexa.Database import (is_active_chat, is_music_playing, music_off,
-                            music_on, remove_active_chat,
-                            remove_active_video_chat)
+from Alexa.Core.PyTgCalls.Alexa import (
+    pause_stream,
+    resume_stream,
+    skip_stream,
+    skip_video_stream,
+    stop_stream,
+)
+from Alexa.Database import (
+    is_active_chat,
+    is_music_playing,
+    music_off,
+    music_on,
+    remove_active_chat,
+    remove_active_video_chat,
+)
 from Alexa.Decorators.admins import AdminRightsCheck
 from Alexa.Decorators.checker import checker, checkerCB
 from Alexa.Inline import audio_markup, primary_markup, secondary_markup2
@@ -74,8 +88,7 @@ __HELP__ = """
 
 
 @app.on_message(
-    filters.command(["pause", "skip", "resume", "stop", "end"])
-    & filters.group
+    filters.command(["pause", "skip", "resume", "stop", "end"]) & filters.group
 )
 @AdminRightsCheck
 @checker
@@ -223,9 +236,7 @@ async def admins(_, message: Message):
                             "ғᴀɪʟᴇᴅ ᴛᴏ ғᴇᴛᴄʜ ᴠɪᴅᴇᴏ ғᴏʀᴍᴀᴛs...",
                         )
                     try:
-                        await skip_video_stream(
-                            chat_id, ytlink, quality, mystic
-                        )
+                        await skip_video_stream(chat_id, ytlink, quality, mystic)
                     except Exception as e:
                         return await mystic.edit(
                             f"ᴇʀʀᴏʀ ᴡʜɪʟᴇ ᴄʜᴀɴɢɪɴɢ ᴠɪᴅᴇᴏ sᴛʀᴇᴀᴍ...\n\nᴘᴏssɪʙʟᴇ ʀᴇᴀsᴏɴ:- {e}"

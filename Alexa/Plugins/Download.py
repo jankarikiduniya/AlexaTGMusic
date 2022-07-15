@@ -6,9 +6,15 @@ from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from PIL import Image
 from pyrogram import Client, filters
-from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
-                            InlineKeyboardMarkup, InputMediaAudio,
-                            InputMediaDocument, InputMediaVideo, Message)
+from pyrogram.types import (
+    CallbackQuery,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    InputMediaAudio,
+    InputMediaDocument,
+    InputMediaVideo,
+    Message,
+)
 from youtubesearchpython import VideosSearch
 
 from Alexa import MUSIC_BOT_NAME, app
@@ -92,9 +98,7 @@ def inl_mark(videoid, user_id):
             InlineKeyboardButton(
                 text="⬅️  ɢᴏ ʙᴀᴄᴋ", callback_data=f"good {videoid}|{user_id}"
             ),
-            InlineKeyboardButton(
-                text="🗑 ᴄʟᴏsᴇ ᴍᴇɴᴜ", callback_data=f"close2"
-            ),
+            InlineKeyboardButton(text="🗑 ᴄʟᴏsᴇ ᴍᴇɴᴜ", callback_data=f"close2"),
         ],
     ]
     return buttons
@@ -228,9 +232,7 @@ async def boom(_, CallbackQuery):
         )
     if med:
         loop.create_task(
-            send_file(
-                CallbackQuery, med, filename, videoid, user_id, yturl, channel
-            )
+            send_file(CallbackQuery, med, filename, videoid, user_id, yturl, channel)
         )
     else:
         print("ᴍᴇᴅ ɴᴏᴛ ғᴏᴜɴᴅ")
@@ -243,9 +245,7 @@ def p_mark(link, channel):
     return buttons
 
 
-async def send_file(
-    CallbackQuery, med, filename, videoid, user_id, link, channel
-):
+async def send_file(CallbackQuery, med, filename, videoid, user_id, link, channel):
     await CallbackQuery.edit_message_text(
         "ᴜᴘʟᴏᴀᴅ sᴛᴀʀᴛᴇᴅ...\n\nᴜᴘʟᴏᴀᴅɪɴɢ sᴘᴇᴇᴅ ᴄᴏᴜʟᴅ ʙᴇ sʟᴏᴡ ᴘʟᴇᴀsᴇ ʜᴏʟᴅ oɴ...",
         reply_markup=upl,
@@ -335,8 +335,5 @@ async def downloadaudiocli(command_to_exec):
     t_response = stdout.decode().strip()
 
     return (
-        t_response.split("Destination")[-1]
-        .split("Deleting")[0]
-        .split(":")[-1]
-        .strip()
+        t_response.split("Destination")[-1].split("Deleting")[0].split(":")[-1].strip()
     )

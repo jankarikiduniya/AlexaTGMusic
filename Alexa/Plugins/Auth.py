@@ -5,17 +5,20 @@
 # Harshit Sharma
 
 
-
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
 from Alexa import SUDOERS, app
-from Alexa.Database import (_get_authusers, delete_authuser, get_authuser,
-                            get_authuser_count, get_authuser_names,
-                            save_authuser)
+from Alexa.Database import (
+    _get_authusers,
+    delete_authuser,
+    get_authuser,
+    get_authuser_count,
+    get_authuser_names,
+    save_authuser,
+)
 from Alexa.Decorators.admins import AdminActual
-from Alexa.Utilities.changers import (alpha_to_int, int_to_alpha,
-                                      time_to_seconds)
+from Alexa.Utilities.changers import alpha_to_int, int_to_alpha, time_to_seconds
 
 __MODULE__ = "😚 ᴀᴜᴛʜ ᴜsᴇʀs"
 __HELP__ = """
@@ -70,9 +73,7 @@ async def auth(_, message: Message):
                 "admin_name": from_user_name,
             }
             await save_authuser(message.chat.id, token, assis)
-            await message.reply_text(
-                f"ᴀᴅᴅᴇᴅ ᴛᴏ ᴀᴜᴛʜᴏʀɪsᴇᴅ ᴜsᴇʀs ʟɪsᴛ ᴏғ ᴛʜɪs ɢʀᴏᴜᴘ..."
-            )
+            await message.reply_text(f"ᴀᴅᴅᴇᴅ ᴛᴏ ᴀᴜᴛʜᴏʀɪsᴇᴅ ᴜsᴇʀs ʟɪsᴛ ᴏғ ᴛʜɪs ɢʀᴏᴜᴘ...")
             return
         else:
             await message.reply_text(f"ᴀʟʀᴇᴀᴅʏ ɪɴ ᴛʜᴇ ᴀᴜᴛʜᴏʀɪsᴇᴅ ᴜsᴇʀs ʟɪsᴛ...")
@@ -98,9 +99,7 @@ async def auth(_, message: Message):
             "admin_name": from_user_name,
         }
         await save_authuser(message.chat.id, token, assis)
-        await message.reply_text(
-            f"ᴀᴅᴅᴇᴅ ᴛᴏ ᴀᴜᴛʜᴏʀɪsᴇᴅ ᴜsᴇʀs ʟɪsᴛ ᴏғ ᴛʜɪs ɢʀᴏᴜᴘ..."
-        )
+        await message.reply_text(f"ᴀᴅᴅᴇᴅ ᴛᴏ ᴀᴜᴛʜᴏʀɪsᴇᴅ ᴜsᴇʀs ʟɪsᴛ ᴏғ ᴛʜɪs ɢʀᴏᴜᴘ...")
         return
     else:
         await message.reply_text(f"ᴀʟʀᴇᴀᴅʏ ɪɴ ᴛʜᴇ ᴀᴜᴛʜᴏʀɪsᴇᴅ ᴜsᴇʀs ʟɪsᴛ...")
@@ -147,9 +146,7 @@ async def authusers(_, message: Message):
         )
     else:
         j = 0
-        m = await message.reply_text(
-            "ғᴇᴛᴄʜɪɴɢ ᴀᴜᴛʜᴏʀɪsᴇᴅ ᴜsᴇʀs ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ..."
-        )
+        m = await message.reply_text("ғᴇᴛᴄʜɪɴɢ ᴀᴜᴛʜᴏʀɪsᴇᴅ ᴜsᴇʀs ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ...")
         msg = f"**ᴀᴜᴛʜᴏʀɪsᴇᴅ ᴜsᴇʀs ʟɪsᴛ[ᴀᴜʟ]:**\n\n"
         for note in _playlist:
             _note = await get_authuser(message.chat.id, note)
